@@ -1,7 +1,7 @@
 const UserModel = require('./UserModel');
-const PhoneModel = require('./PhoneModel');
+const MovieModel = require('./MovieModel');
 
 module.exports = {
   UserModel,
-  PhoneModel,
+  MovieModel,
 };
