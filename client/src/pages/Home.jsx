@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import PhoneForm from '../components/form/PhoneForm';
+
+import './home.css';
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div className="homepage">
+      <PhoneForm />
+    </div>
+  );
+};
 
-export default Home
+export default Home;

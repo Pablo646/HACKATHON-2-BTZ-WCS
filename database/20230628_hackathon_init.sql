@@ -11,20 +11,22 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Table `phones`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `phones`;
 CREATE TABLE IF NOT EXISTS `phones` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `estimation_date` DATETIME NOT NULL,
+  `estimation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `brand` VARCHAR(150) NOT NULL,
   `model` VARCHAR(150) NOT NULL,
-  `phone_year` DATE NOT NULL,
-  `stockage` INT NOT NULL,
+  `phone_year` YEAR NOT NULL,
+  `storage` INT NOT NULL,
   `memory_ram` INT NOT NULL,
-  `isblocked` TINYINT NOT NULL,
+  `is_blocked` TINYINT NOT NULL,
   `screen_size` DECIMAL(2,1) NOT NULL,
-  `pohne_status` VARCHAR(65) NOT NULL,
-  `estimation_price` DECIMAL(4,2) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  `phone_status` VARCHAR(65) NOT NULL,
+  `antutu_score` INT NOT NULL,
+  `estimation_price` DECIMAL(4,2),
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
