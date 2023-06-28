@@ -1,7 +1,7 @@
 const userRouter = require('./userRoutes');
-const phoneRouter = require('./phoneRoutes');
+const movieRouter = require('./movieRoutes');
 
 module.exports = {
   userRouter,
-  phoneRouter,
+  movieRouter,
 };

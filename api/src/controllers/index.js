@@ -1,7 +1,7 @@
 const UserController = require('./UserController');
-const PhoneController = require('./PhoneController');
+const MovieController = require('./MovieController');
 
 module.exports = {
   UserController,
-  PhoneController,
+  MovieController,
 };
