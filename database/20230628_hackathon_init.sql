@@ -9,15 +9,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema emmaus_connect
+-- Table `phones`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `emmaus_connect` DEFAULT CHARACTER SET utf8 ;
-USE `emmaus_connect` ;
-
--- -----------------------------------------------------
--- Table `emmaus_connect`.`phones`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`phones` (
+CREATE TABLE IF NOT EXISTS `phones` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `estimation_date` DATETIME NOT NULL,
   `brand` VARCHAR(150) NOT NULL,
@@ -34,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`emmaus`
+-- Table `emmaus`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`emmaus` (
+CREATE TABLE IF NOT EXISTS `emmaus` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `city` VARCHAR(155) NOT NULL,
   PRIMARY KEY (`id`))
@@ -44,28 +38,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`users`
+-- Table `users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(150) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
-  `emmaus_id` INT NOT NULL,
+  `emmaus_id` INT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   INDEX `fk_users_emmaus_idx` (`emmaus_id` ASC) VISIBLE,
   CONSTRAINT `fk_users_emmaus`
     FOREIGN KEY (`emmaus_id`)
-    REFERENCES `emmaus_connect`.`emmaus` (`id`)
+    REFERENCES `emmaus` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`users_has_phones`
+-- Table `users_has_phones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`users_has_phones` (
+CREATE TABLE IF NOT EXISTS `users_has_phones` (
   `users_id` INT NOT NULL,
   `phones_id` INT NOT NULL,
   PRIMARY KEY (`users_id`, `phones_id`),
@@ -73,21 +67,21 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`users_has_phones` (
   INDEX `fk_users_has_phones_users1_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_users_has_phones_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `emmaus_connect`.`users` (`id`)
+    REFERENCES `users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_phones_phones1`
     FOREIGN KEY (`phones_id`)
-    REFERENCES `emmaus_connect`.`phones` (`id`)
+    REFERENCES `phones` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`room`
+-- Table `room`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`room` (
+CREATE TABLE IF NOT EXISTS `room` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -95,9 +89,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`message`
+-- Table `message`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`message` (
+CREATE TABLE IF NOT EXISTS `message` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` TEXT(255) NOT NULL,
   `date` DATETIME NOT NULL,
@@ -106,16 +100,16 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`message` (
   INDEX `fk_message_room1_idx` (`room_id` ASC) VISIBLE,
   CONSTRAINT `fk_message_room1`
     FOREIGN KEY (`room_id`)
-    REFERENCES `emmaus_connect`.`room` (`id`)
+    REFERENCES `room` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `emmaus_connect`.`users_has_message`
+-- Table `users_has_message`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `emmaus_connect`.`users_has_message` (
+CREATE TABLE IF NOT EXISTS `users_has_message` (
   `users_id` INT NOT NULL,
   `message_id` INT NOT NULL,
   PRIMARY KEY (`users_id`, `message_id`),
@@ -123,12 +117,12 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`users_has_message` (
   INDEX `fk_users_has_message_users1_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_users_has_message_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `emmaus_connect`.`users` (`id`)
+    REFERENCES `users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_message_message1`
     FOREIGN KEY (`message_id`)
-    REFERENCES `emmaus_connect`.`message` (`id`)
+    REFERENCES `message` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

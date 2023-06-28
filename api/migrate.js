@@ -4,7 +4,7 @@ const mysql = require("mysql2/promise");
 const path = require("path");
 
 
-const migrationsDir = path.resolve(`${__dirname}../database/`);
+const migrationsDir = path.resolve(`${__dirname}/../database/`);
 
 const migrate = async () => {
   const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
