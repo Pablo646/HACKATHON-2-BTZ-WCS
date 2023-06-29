@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import CategoryCalculation from './CategoryCalculation';
 
 import './phoneform.css';
 
@@ -68,6 +69,21 @@ const PhoneForm = () => {
 
   // Get the available phone models based on the selected brand
   const availableModels = brandModels[formData.brand] || [];
+
+  // Extract the required values from the formData state
+  const { storage, memoryRam, antutuScore, phoneStatus } = formData;
+
+  // Check if all form fields are filled up
+  const isFormComplete =
+    formData.brand &&
+    formData.model &&
+    formData.phoneYear &&
+    formData.storage &&
+    formData.memoryRam &&
+    formData.isBlocked &&
+    formData.screenSize &&
+    formData.phoneStatus &&
+    formData.antutuScore;
 
   return (
     <form className="phone_form" onSubmit={handleSubmit}>
@@ -210,6 +226,17 @@ const PhoneForm = () => {
         <option value="100000-150000">100,000 - 150,000</option>
         <option value="150000-200000">150,000 - 200,000</option>
       </select>
+
+      {isFormComplete && (
+        <div>
+          <CategoryCalculation
+            storage={storage}
+            memoryRam={memoryRam}
+            antutuScore={antutuScore}
+            phoneStatus={phoneStatus}
+          />
+        </div>
+      )}
 
       <button type="submit" onClick={handleSubmit}>
         Submit

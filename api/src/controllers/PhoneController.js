@@ -9,7 +9,7 @@ class PhoneController extends BaseController {
 
   create() {
     const phoneData = this.req.body;
-    phoneData.estimationPrice = 70;
+
     this.model
       .create(phoneData)
       .then(() => this.sendJson({ message: 'Phone created successfully' }))
