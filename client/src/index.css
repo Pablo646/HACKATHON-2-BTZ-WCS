@@ -11,6 +11,8 @@
     /* couleur dans les input par exemple*/
     --couleur-tierce: #FFAB1D;
     /* couleur des bouttons par exemple*/
+    --blanc1: rgb(250, 249, 249);
+    /* couleur de l'arriere plan*/
 }
 
 
