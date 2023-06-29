@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(./assets/fonts/Roboto/Roboto-Regular.ttf);
+}
+
+:root {
+    --font1: Roboto, sans-serif;
+    --couleur-principale: #04ABAF;
+    /* couleur de la nav bar et du footer par exemple*/
+    --couleur-secondaire: #DCF4F4;
+    /* couleur dans les input par exemple*/
+    --couleur-tierce: #FFAB1D;
+    /* couleur des bouttons par exemple*/
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font1);
+}
