@@ -1,10 +1,13 @@
-const { Router } = require('express');
-const { PhoneController } = require('../controllers');
+const express = require('express');
+const PhoneController = require('../controllers/PhoneController');
 
-const phoneRouter = Router();
+const router = express.Router();
+const phoneController = new PhoneController();
 
-phoneRouter.get('', (req, res) => new PhoneController(req, res).getAll());
+router.get('', (req, res) => new PhoneController(req, res).getAll());
+router.get('/:id', (req, res) =>
+  new PhoneController(req, res).getByID(req, res)
+);
+router.post('', (req, res) => new PhoneController(req, res).create());
 
-phoneRouter.get('/:id', (req, res) => new PhoneController(req, res).getByID());
-
-module.exports = phoneRouter;
+module.exports = router;

@@ -14,7 +14,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 DROP TABLE IF EXISTS `phones`;
 CREATE TABLE IF NOT EXISTS `phones` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `estimation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `brand` VARCHAR(150) NOT NULL,
   `model` VARCHAR(150) NOT NULL,
   `phone_year` YEAR NOT NULL,
@@ -23,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `phones` (
   `is_blocked` TINYINT NOT NULL,
   `screen_size` DECIMAL(2,1) NOT NULL,
   `phone_status` VARCHAR(65) NOT NULL,
-  `antutu_score` INT NOT NULL,
+  `antutu_score` VARCHAR(150) NOT NULL,
   `estimation_price` DECIMAL(4,2),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;

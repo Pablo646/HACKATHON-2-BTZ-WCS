@@ -31,7 +31,7 @@ const PhoneForm = () => {
     // Perform actions with the form data, such as sending it to a server or updating the database
     try {
       // Send the form data to the server
-      await axios.post('/api/phones', formData);
+      await axios.post('/phones', formData);
       // Reset the form fields after submission
       setFormData({
         brand: '',
@@ -57,57 +57,100 @@ const PhoneForm = () => {
     }
   };
 
+  const brandModels = {
+    Apple: ['iPhone 12', 'iPhone 11', 'iPhone SE', 'iPhone XR'],
+    Samsung: ['Galaxy S21', 'Galaxy S20', 'Galaxy Note 20', 'Galaxy A52'],
+    'Google Pixel': ['Pixel 5', 'Pixel 4a', 'Pixel 3a', 'Pixel 2'],
+    Oppo: ['Oppo Reno 5', 'Oppo Find X3', 'Oppo A74', 'OF19'],
+    Xiaomi: ['Mi 11', 'Redmi Note 10 Pro', 'Poco X3 Pro', 'Mi 10T'],
+    Nokia: ['Nokia 8.3', 'Nokia 5.4', 'Nokia 3.4', 'Nokia 2.4'],
+  };
+
+  // Get the available phone models based on the selected brand
+  const availableModels = brandModels[formData.brand] || [];
+
   return (
     <form className="phone_form" onSubmit={handleSubmit}>
       <label htmlFor="brand">Brand:</label>
-      <input
-        type="text"
+      <select
         id="brand"
         name="brand"
         value={formData.brand}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select a brand</option>
+        <option value="Apple">Apple</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Google Pixel">Google Pixel</option>
+        <option value="Oppo">Oppo</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Nokia">Nokia</option>
+      </select>
 
       <label htmlFor="model">Model:</label>
-      <input
-        type="text"
+      <select
         id="model"
         name="model"
         value={formData.model}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select a model</option>
+        {availableModels.map((model) => (
+          <option key={model} value={model}>
+            {model}
+          </option>
+        ))}
+      </select>
 
       <label htmlFor="phoneYear">Phone Year:</label>
-      <input
-        type="number"
+      <select
         id="phoneYear"
         name="phoneYear"
         value={formData.phoneYear}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select a year</option>
+        {Array.from({ length: new Date().getFullYear() - 2009 }, (_, index) => (
+          <option key={index} value={2010 + index}>
+            {2010 + index}
+          </option>
+        ))}
+      </select>
 
       <label htmlFor="storage">Storage:</label>
-      <input
+      <select
+        classname="form_input"
         type="number"
         id="storage"
         name="storage"
         value={formData.storage}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select storage size</option>
+        <option value="8">8GB</option>
+        <option value="16">16GB</option>
+        <option value="32">32GB</option>
+        <option value="64">64GB</option>
+        <option value="128">128GB</option>
+        <option value="256">256GB</option>
+      </select>
 
       <label htmlFor="memoryRam">Memory RAM:</label>
-      <input
-        type="number"
+      <select
         id="memoryRam"
         name="memoryRam"
         value={formData.memoryRam}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select RAM size</option>
+        <option value="2">2GB</option>
+        <option value="3">3GB</option>
+        <option value="4">4GB</option>
+        <option value="6">6GB</option>
+        <option value="8">8GB</option>
+        <option value="12">12GB</option>
+        <option value="16">16GB</option>
+      </select>
 
       <label htmlFor="isBlocked">Is Blocked:</label>
       <select
@@ -122,37 +165,55 @@ const PhoneForm = () => {
       </select>
 
       <label htmlFor="screenSize">Screen Size:</label>
-      <input
-        type="number"
+      <select
         id="screenSize"
         name="screenSize"
-        step="0.1"
         value={formData.screenSize}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select screen size</option>
+        <option value="4.0">4.0 "</option>
+        <option value="4.7">4.7 "</option>
+        <option value="5.0">5.0 "</option>
+        <option value="5.5">5.5 "</option>
+        <option value="6.0">6.0 "</option>
+        <option value="6.5">6.5 "</option>
+      </select>
 
       <label htmlFor="phoneStatus">Phone Status:</label>
-      <input
-        type="text"
+      <select
         id="phoneStatus"
         name="phoneStatus"
         value={formData.phoneStatus}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select phone status</option>
+        <option value="DEEE">DEEE</option>
+        <option value="REPARABLE">REPARABLE</option>
+        <option value="BLOQUE">BLOQUE</option>
+        <option value="RECONDITIONABLE">RECONDITIONABLE</option>
+        <option value="RECONDITIONNE">RECONDITIONNE</option>
+        <option value="TRES BON ETAT">TRES BON ETAT</option>
+        <option value="NEUF">NEUF</option>
+      </select>
 
-      <label htmlFor="phoneStatus">Antutu Score:</label>
-      <input
-        type="text"
+      <label htmlFor="antutuScore">Antutu Score:</label>
+      <select
         id="antutuScore"
         name="antutuScore"
-        value={formData.phoneStatus}
+        value={formData.antutuScore}
         onChange={handleChange}
-        required
-      />
+        required>
+        <option value="">Select an Antutu Score range</option>
+        <option value="0-50000">0 - 50,000</option>
+        <option value="50000-100000">50,000 - 100,000</option>
+        <option value="100000-150000">100,000 - 150,000</option>
+        <option value="150000-200000">150,000 - 200,000</option>
+      </select>
 
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
     </form>
   );
 };
