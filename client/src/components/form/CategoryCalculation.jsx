@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryCalculation = (storage, memoryRam, antutuScore, phoneStatus) => {
+const CategoryCalculation = ({storage, memoryRam, antutuScore, phoneStatus}) => {
   //get form valors
   let memory_index;
   let storage_index;
@@ -8,20 +8,38 @@ const CategoryCalculation = (storage, memoryRam, antutuScore, phoneStatus) => {
   let ponderation;
   let category;
   //check memory
-  if (memoryRam === 1) {
+  if (memoryRam === '1GB') {
     memory_index = 30;
-  } else if (memoryRam === 2) {
+  } else if (memoryRam === '2GB') {
     memory_index = 40;
+  } else if (memoryRam === '3GB') {
+    memory_index = 50;
+  } else if (memoryRam === '4GB') {
+    memory_index = 60;
+  } else if (memoryRam === '6GB') {
+    memory_index = 70;
+  } else if (memoryRam === '8GB') {
+    memory_index = 80;
+  } else if (memoryRam === '12GB') {
+    memory_index = 90;
+  } else if (memoryRam === '16GB') {
+    memory_index = 100;
   } else {
-    memory_index = 54;
+    memory_index = 110;
   }
   //check storage
-  if (storage === 16) {
+  if (storage === '8GB') {
     storage_index = 31;
-  } else if (storage === 32) {
+  } else if (storage === '16GB') {
     storage_index = 45;
+  }else if (storage === '32GB') {
+    storage_index = 59;
+  }else if (storage === '64GB') {
+    storage_index = 73;
+  }else if (storage === '128GB') {
+    storage_index = 87;
   } else {
-    storage_index = 66;
+    storage_index = 100;
   }
   //check antutu index
   if (antutuScore === '150000 - 200000') {
@@ -47,7 +65,7 @@ const CategoryCalculation = (storage, memoryRam, antutuScore, phoneStatus) => {
   } else if (phoneStatus === 'Très bon état') {
     ponderation = 0.05;
   } else {
-    ponderation = 0.1;
+    ponderation = 0.2;
   }
 
   let overall_index =
@@ -55,11 +73,11 @@ const CategoryCalculation = (storage, memoryRam, antutuScore, phoneStatus) => {
   //calculate the overall index
   if (overall_index >= 375) {
     category = '5- Premium';
-  } else if (overall_index >= 255) {
+  } else if (overall_index >= 255 && overall_index < 375) {
     category = '4 - A';
-  } else if (overall_index >= 165) {
+  } else if (overall_index >= 165 && overall_index < 255) {
     category = '3 - B';
-  } else if (overall_index >= 90) {
+  } else if (overall_index >= 90 && overall_index < 165) {
     category = '2 - C';
   } else {
     category = '1 - HC';

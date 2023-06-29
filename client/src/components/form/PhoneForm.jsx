@@ -135,7 +135,7 @@ const PhoneForm = () => {
 
       <label htmlFor="storage">Storage:</label>
       <select
-        classname="form_input"
+        className="form_input"
         type="number"
         id="storage"
         name="storage"
