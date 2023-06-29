@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import './Login.css'
 import React, {useState} from 'react'
 import axios from 'axios'
-
+import Footer from '../../components/footer/Footer'
+import Navbar from '../../components/navbar/Navbar'
 const Login = () => {
   const [form, setForm] = useState({email : "", password: ""});
   const [error, setError] = useState(false);
@@ -25,6 +26,8 @@ const Login = () => {
 };
 
   return (
+  <div>
+    <Navbar />
     <div className='login'>
        <div className="left_container">
            <div className="login_container">
@@ -36,8 +39,11 @@ const Login = () => {
                     <Link to="#"><p className="forgotten_password">Mot de passe oublié</p></Link>
                     <button type='submit'>Connectez-vous</button>
                 </form>
-          </div>
+            </div>
       </div>
+      <Footer />
+    </div>
+      
     
   )
 }
